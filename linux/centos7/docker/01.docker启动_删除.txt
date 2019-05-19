@@ -1,9 +1,9 @@
 
 -- 进入docker容器中
 
-    1：docker attach id  刚方法进入之后，exit退出就会导致容器stop
+    1：docker attach container_id  刚方法进入之后，exit退出就会导致容器stop
 
-    2：docker exec -it containerID /bin/bash   这个命令exit退出，ok容器还在运行
+    2：docker exec -it container_id /bin/bash   这个命令exit退出，ok容器还在运行
 
     3、导出某个容器
         导出某个容器，使用docker export命令，语法：docker export $container_id > 容器快照名
@@ -13,9 +13,9 @@
         例如我们可以使用cat centos.tar | docker import - my/centos:v888 导入容器快照作为镜像
 
     5.删除容器
-        可以使用"docker rm 容器id"来删除一个终止状态的容器；
+        可以使用"docker rm container_id"来删除一个终止状态的容器；
         若要删除一个运行中的容器，需要加-f参数
-        docker rm -f tomcat_id
+        docker rm -f container_id
 
     6.删除镜像
-        docker rmi mysql_id
+        docker rmi images_id

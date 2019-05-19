@@ -1,0 +1,38 @@
+
+-- mysql
+    01.安装docker命令
+        yum install docker
+    02.拉取镜像
+        docker pull mysql:5.7
+    03.创建守护式容器
+        docker run --name=a_mysql -p 3306:3306 -v/usr/local/apps/mysql:/usr/local/mysql -v /usr/local/apps/mysql/config:/usr/local/mysql/config -e MYSQL_ROOT_PASSWORD=123456 -d mysql:5.7
+
+-- tomcat
+    01.拉取镜像
+        docker pull tomcat:8.5-jre8
+    02.创建守护式容器 (挂载目录webapps/logs)
+        docker run -di --name=a_tomcat -p 8080:8080 -v /usr/local/apps/tomcat/webapps:/usr/local/tomcat/webapps -v /usr/local/apps/tomcat/logs:/usr/local/tomcat/logs --privileged=true tomcat:8.5-jre8
+
+-- redis
+    01.拉取镜像
+        docker pull redis:3.2
+    02.创建守护式容器
+        docker run -di --name=a_redis -p 6379:6379 -v /usr/local/apps/redis:/usr/local/redis --privileged=true redis:3.2
+
+-- mongodb
+    01.拉取镜像
+        docker pull mongodb:4.0
+    02.创建守护式容器
+        docker run -di --name=a_mongodb -p
+
+-- nginx
+    01.拉取Nginx镜像
+        docker pull nginx
+    02.创建Nginx容器
+        docker run -di --name=a_nginx -p 80:80  nginx/bin/bash
+
+
+
+
+
+

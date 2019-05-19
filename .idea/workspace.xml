@@ -3,6 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="46492667-661c-4ffa-81a9-220906cfb737" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/linux/centos7/docker/03.执行程序shell脚本.txt" beforeDir="false" afterPath="$PROJECT_DIR$/linux/centos7/docker/03.执行程序shell脚本.txt" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -20,14 +21,18 @@
       </file>
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/linux/centos7/docker/03.执行程序shell脚本.txt">
-          <provider selected="true" editor-type-id="text-editor" />
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="216">
+              <caret line="9" column="25" selection-start-line="9" selection-start-column="25" selection-end-line="9" selection-end-column="25" />
+            </state>
+          </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/linux/centos7/docker/04.国内镜像URL.json">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="168">
-              <caret line="7" column="1" lean-forward="true" selection-start-line="7" selection-start-column="1" selection-end-line="7" selection-end-column="1" />
+              <caret line="7" column="1" selection-start-line="7" selection-start-column="1" selection-end-line="7" selection-end-column="1" />
             </state>
           </provider>
         </entry>
@@ -45,6 +50,11 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="master" />
+      </map>
+    </option>
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
@@ -55,6 +65,7 @@
         <option value="$PROJECT_DIR$/linux/centos7/docker/01.docker启动、删除.txt" />
         <option value="$PROJECT_DIR$/linux/centos7/docker/04.国内镜像URL.txt" />
         <option value="$PROJECT_DIR$/linux/centos7/docker/04.国内镜像URL.json" />
+        <option value="$PROJECT_DIR$/linux/centos7/docker/03.执行程序shell脚本.txt" />
       </list>
     </option>
   </component>
@@ -78,6 +89,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -101,7 +113,7 @@
               <item name="linux_centos7_docker" type="462c0819:PsiDirectoryNode" />
               <item name="linux" type="462c0819:PsiDirectoryNode" />
               <item name="centos7" type="462c0819:PsiDirectoryNode" />
-              <item name="docker" type="462c0819:PsiDirectoryNode" />
+              <item name="img" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="linux_centos7_docker" type="b2602c69:ProjectViewProjectNode" />
@@ -112,7 +124,6 @@
         </subPane>
       </pane>
       <pane id="PackagesPane" />
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -128,6 +139,7 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="F:\ideaProject\linux_centos7_docker\linux\centos7\img" />
       <recent name="F:\ideaProject\linux_centos7_docker\linux\centos7" />
     </key>
   </component>
@@ -155,16 +167,18 @@
       <updated>1558251623437</updated>
       <workItem from="1558251625196" duration="6422000" />
       <workItem from="1558272465821" duration="60000" />
+      <workItem from="1558274856579" duration="923000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="6482000" />
+    <option name="totallyTimeSpent" value="7405000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-9" y="-9" width="1938" height="1050" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.25375536" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.25751072" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Designer" order="2" />
       <window_info id="UI Designer" order="3" />
@@ -201,7 +215,7 @@
     <entry file="file://$PROJECT_DIR$/linux/centos7/docker/04.国内镜像URL.json">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="168">
-          <caret line="7" column="1" lean-forward="true" selection-start-line="7" selection-start-column="1" selection-end-line="7" selection-end-column="1" />
+          <caret line="7" column="1" selection-start-line="7" selection-start-column="1" selection-end-line="7" selection-end-column="1" />
         </state>
       </provider>
     </entry>
@@ -212,8 +226,15 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/linux/centos7/img/linux各目录介绍.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
     <entry file="file://$PROJECT_DIR$/linux/centos7/docker/03.执行程序shell脚本.txt">
-      <provider selected="true" editor-type-id="text-editor" />
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="216">
+          <caret line="9" column="25" selection-start-line="9" selection-start-column="25" selection-end-line="9" selection-end-column="25" />
+        </state>
+      </provider>
     </entry>
   </component>
   <component name="masterDetails">

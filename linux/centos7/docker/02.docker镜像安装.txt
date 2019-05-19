@@ -10,7 +10,7 @@
 -- tomcat
     01.拉取镜像
         docker pull tomcat:8.5-jre8
-    02.创建守护式容器 (挂载目录webapps/logs)
+    02.创建守护式容器 (挂载目录webapps/logs)，（需要在webapps文件夹中配置tomcat的4个文件夹）
         docker run -di --name=a_tomcat -p 8080:8080 -v /usr/local/apps/tomcat/webapps:/usr/local/tomcat/webapps -v /usr/local/apps/tomcat/logs:/usr/local/tomcat/logs --privileged=true tomcat:8.5-jre8
 
 -- redis

@@ -4,6 +4,7 @@
     1：docker attach id  刚方法进入之后，exit退出就会导致容器stop
 
     2：docker exec -it containerID /bin/bash   这个命令exit退出，ok容器还在运行
+       docker start c8ac0e8b2666  --(直接开启docker容器)
 
     3、导出某个容器
         导出某个容器，使用docker export命令，语法：docker export $container_id > 容器快照名

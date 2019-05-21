@@ -1,0 +1,26 @@
+
+----------------------------------------------
+
+[root@www ~]# shutdown -h now
+
+立刻关机，其中 now 相当于时间为 0 的状态
+
+[root@www ~]# shutdown -h 20:25
+
+系统在今天的 20:25 会关机，若在21:25才下达此命令，则隔天才关机
+
+[root@www ~]# shutdown -h +10
+
+系统再过十分钟后自动关机
+
+[root@www ~]# shutdown -r now
+
+系统立刻重新启动
+
+[root@www ~]# shutdown -r +30 'The system will reboot'
+
+再过三十分钟系统会重新启动，并显示后面的信息给所有在在线的使用者
+
+[root@www ~]# shutdown -k now 'This system will reboot'
+
+仅发出警告信件的参数！系统并不会关机啦！吓唬人！

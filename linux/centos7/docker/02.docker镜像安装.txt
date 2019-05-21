@@ -23,7 +23,7 @@
     01.拉取镜像
         docker pull mongodb:4.0
     02.创建守护式容器
-        docker run -di --name a_mongodb -v /usr/local/apps/mongodb:/usr/local/mongodb -p 27017:27017 5976dac61f4f
+        docker run -di --name a_mongodb -v /usr/local/apps/mongodb:/usr/local/mongodb -p 27017:27017 mongodb:4.0
         -v后面的参数表示把数据文件挂载到宿主机的路径
         -p把mongo端口映射到宿主机的指定端口
         --auth表示连接mongodb需要授权

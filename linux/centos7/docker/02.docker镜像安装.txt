@@ -40,6 +40,17 @@
     02.创建Elasticsearch容器
         docker run -di -e ES_JAVA_OPTS="-Xms256m -Xmx256m" -p 5601:5601 -p 5044:5044 -p 9200:9200 -p 9300:9300 --name a_elk sebp/elk
 
+      {
+        docker pull elasticsearch
+        docker run -di -e ES_JAVA_OPTS="-Xms256m -Xmx256m" -p 9200:9200 -p 9300:9300 --name b_elk elasticsearch
+      }
+
+-- 其中 -e ES_JAVA_OPTS="-Xms256m -Xmx256m"为设置elasticsearch的使用内存大小为256m，原本默认为2G，这里如果不配置，可能会启动出错。
+
+   -p 9200:9200 -p 9300:9300 表示开放9200和9300端口
+
+   --name ES01表示命名为ES01
+   ---------------------
     --- 由于sebp/elk中logstash的input的方式默认是filebeat,首先们需要进入elk容器中修改input方式。logstash默认会将etc/logstash/conf.d/中的配置文件进行整合然后启动。
     03.#进入容器    (开启容器:docker start ecbe60716cd3)
         docker exec -it elk /bin/bash

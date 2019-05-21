@@ -31,7 +31,7 @@
 -- nginx
     01.拉取Nginx镜像
         docker pull nginx
-    02.创建Nginx容器
+    02.创建Nginx容器（-v目录挂载）
         docker run -di --name=a_nginx -p 80:80  nginx/bin/bash
 
 

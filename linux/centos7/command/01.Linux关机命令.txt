@@ -24,3 +24,8 @@
 [root@www ~]# shutdown -k now 'This system will reboot'
 
 仅发出警告信件的参数！系统并不会关机啦！吓唬人！
+
+----------------------------------------------
+
+[root@HonLin ~]# shutdown -h 20:25
+Shutdown scheduled for 二 2019-05-21 20:25:00 CST, use 'shutdown -c' to cancel.

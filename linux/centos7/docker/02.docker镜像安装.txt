@@ -34,6 +34,27 @@
     02.创建Nginx容器（-v目录挂载）
         docker run -di --name=a_nginx -p 80:80  nginx/bin/bash
 
+        --- a.配置反向代理
+        官方的nginx镜像,nginx配置文件nginx.conf 在/etc/nginx/目录下。在容器内编辑配置文件不方便，我们可以先将配置文件从容器内拷贝到宿主机，编辑修改后再拷贝回去。
+
+        --- b.从容器拷贝配置文件到宿主机
+        [root@localhost ~]# docker cp a_nginx:/etc/nginx/nginx.conf nginx.conf
+        -- 修改nginx.conf 添加如下配置：
+        upstream tomcat-cas {
+        	server 172.17.0.7:8080;
+        }
+        server {
+        	listen 80;
+        	server_name passport.pinyougou.com;
+        	location / {
+        		proxy_pass http://tomcat-cas;
+        		index index.html index.htm;
+        	}
+        }
+        --- c.将修改后的配置文件拷贝到容器
+        docker cp nginx.conf  a_nginx:/etc/nginx/nginx.conf
+--------------------------------------------------------------------------------------------------
+
 -- elk的安装
     01.拉取Elasticsearch镜像
         docker pull sebp/elk

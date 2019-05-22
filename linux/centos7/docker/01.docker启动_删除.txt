@@ -20,3 +20,17 @@
 
     6.删除镜像
         docker rmi images_id
+
+
+----------------------------------------------------------------------------------
+
+--- 查看容器IP地址
+
+    -- 01.我们可以通过以下命令查看容器运行的各种数据:
+            docker inspect container_name
+
+    -- 02.也可以直接执行下面的命令直接输出IP地址:
+            docker inspect --format='{{.NetworkSettings.IPAddress}}' container_name/container_id
+            docker inspect --format='{{.NetworkSettings.IPAddress}}' 6cce7956480f
+
+

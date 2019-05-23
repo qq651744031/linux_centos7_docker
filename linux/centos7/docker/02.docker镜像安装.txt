@@ -55,7 +55,7 @@
         docker cp nginx.conf  a_nginx:/etc/nginx/nginx.conf
 --------------------------------------------------------------------------------------------------
 
--- elk的安装
+-- elk的安装   xxx（下面下载elasticsearch5.6.8）
     01.拉取Elasticsearch镜像
         docker pull sebp/elk
     02.创建Elasticsearch容器
@@ -94,7 +94,24 @@
     --- 保存后，我们使用 control + P + Q 退出容器。然后重启容器，让我们的配置生效。
         docker restart elk
 
+--- elasticsearch下载安装
+    -- 01.拉取elasticsearch镜像
+        docker pull elasticsearch:5.6.8
+    -- 02.创建容器
+        docker run -di --name=a_elasticsearch -v /usr/local/apps/elasticsearch/config_file:usr/share/elasticsearch/config/config_file -p 9200:9200 -p 9300:9300 elasticsearch:5.6.8
+        注:  9200端口(Web管理平台端口)  9300(服务默认端口)
 
+--- RabbitMQ的安装和启动
+    -- 01.拉取RabbitMQ镜像
+          docker pull rabbitmq:management
+    -- 02.创建RabbitMQ容器
+          docker run -di --name=a_rabbitmq -p 5671:5617 -p 5672:5672 -p4369:4369 -p 15671:15671 -p 15672:15672 -p 25672:25672 rabbitmq:management
+            -- 15672 (if management plugin is enabled.管理界面 )
+          	-- 15671 management监听端口
+          	-- 5672, 5671 (AMQP 0-9-1 without and with TLS 消息队列协议是一个消息协议)
+          	-- 4369 (epmd) epmd 代表 Erlang 端口映射守护进程
+          	-- 25672 (Erlang distribution)
+     -- 03.输入用户名和密码，都为guest . 进入http://127.0.0.1:15672主界面
 ---------------------------------------------------------------------------------------
 
     对于运行在后台的docker容器，我们经常需要做的事情是进入到容器中，

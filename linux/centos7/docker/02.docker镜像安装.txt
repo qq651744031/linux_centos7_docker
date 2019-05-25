@@ -33,6 +33,7 @@
         docker pull nginx
     02.创建Nginx容器（-v目录挂载）
         docker run -di --name=a_nginx -p 80:80  nginx/bin/bash
+        docker run -di --name=a_nginx -p 80:80 -v /usr/local/apps/nginx:/etc/nginx/a_config nginx
 
         --- a.配置反向代理
         官方的nginx镜像,nginx配置文件nginx.conf 在/etc/nginx/目录下。在容器内编辑配置文件不方便，我们可以先将配置文件从容器内拷贝到宿主机，编辑修改后再拷贝回去。
@@ -98,7 +99,7 @@
     -- 01.拉取elasticsearch镜像
         docker pull elasticsearch:5.6.8
     -- 02.创建容器
-        docker run -di --name=a_elasticsearch -v /usr/local/apps/elasticsearch/config_file:usr/share/elasticsearch/config/config_file -p 9200:9200 -p 9300:9300 elasticsearch:5.6.8
+        docker run -di --name=a_elasticsearch -v /usr/local/apps/elasticsearch/a_config:/usr/share/elasticsearch/config/a_config -p 9200:9200 -p 9300:9300 elasticsearch:5.6.8
         注:  9200端口(Web管理平台端口)  9300(服务默认端口)
 
 --- RabbitMQ的安装和启动
@@ -112,6 +113,15 @@
           	-- 4369 (epmd) epmd 代表 Erlang 端口映射守护进程
           	-- 25672 (Erlang distribution)
      -- 03.输入用户名和密码，都为guest . 进入http://127.0.0.1:15672主界面
+
+
+--- oracle安装
+
+    -- 01.拉取oracle镜像
+        docker pull docker.io/oraclelinux
+    -- 02.安装oracle容器
+        docker run -d -i -p 1521:15221 --name a_oracle oraclelinux
+        
 ---------------------------------------------------------------------------------------
 
     对于运行在后台的docker容器，我们经常需要做的事情是进入到容器中，
@@ -133,6 +143,7 @@
 
     #每一个容器都有.State.Pid，所以这个命令除了容器的id需要我们根据docker ps -a去查找，其他的全部为固定的格式
     $ docker inspect -f {{.State.Pid}} 容器名或者容器id
+      docker inspect -f {{.State.Pid}} 容器名或者容器id
     $ nsenter --target 上面查到的进程id --mount --uts --ipc --net --pid  #输入该命令便进入到容器中
 
 ---------------------------------------------------------------------------------------

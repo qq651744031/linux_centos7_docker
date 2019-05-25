@@ -1,5 +1,6 @@
 
 // TODO -- mysql
+
     01.安装docker命令
         yum install docker
     02.拉取镜像
@@ -15,6 +16,7 @@
         docker run -di --name=a_tomcat -p 8080:8080 -v /usr/local/apps/tomcat/classes:/usr/local/tomcat/webapps/classes -v /usr/local/apps/tomcat/logs:/usr/local/tomcat/logs --privileged=true tomcat:8.5-jre8
 
 // TODO -- redis
+
     01.拉取镜像
         docker pull redis:3.2
     02.创建守护式容器
@@ -31,6 +33,7 @@
         --auth表示连接mongodb需要授权
 
 // TODO -- nginx
+
     01.拉取Nginx镜像
         docker pull nginx
     02.创建Nginx容器（-v目录挂载）
@@ -59,6 +62,7 @@
 --------------------------------------------------------------------------------------------------
 
 // TODO -- elk的安装   xxx（下面下载elasticsearch5.6.8）
+
     01.拉取Elasticsearch镜像
         docker pull sebp/elk
     02.创建Elasticsearch容器

@@ -1,5 +1,5 @@
 
-// TODO -- mysql
+// TODO --01. mysql
 
     01.安装docker命令
         yum install docker
@@ -8,21 +8,21 @@
     03.创建守护式容器
         docker run --name=a_mysql -p 3306:3306 -v/usr/local/apps/mysql:/usr/local/mysql -v /usr/local/apps/mysql/config:/usr/local/mysql/config -e MYSQL_ROOT_PASSWORD=123456 -d mysql:5.7
 
-// TODO -- tomcat
+// TODO --02. tomcat
 
     01.拉取镜像
         docker pull tomcat:8.5-jre8
     02.创建守护式容器 (挂载目录webapps/logs)，（需要在webapps文件夹中配置tomcat的4个文件夹）
         docker run -di --name=a_tomcat -p 8080:8080 -v /usr/local/apps/tomcat/classes:/usr/local/tomcat/webapps/classes -v /usr/local/apps/tomcat/logs:/usr/local/tomcat/logs --privileged=true tomcat:8.5-jre8
 
-// TODO -- redis
+// TODO --03. redis
 
     01.拉取镜像
         docker pull redis:3.2
     02.创建守护式容器
         docker run -di --name=a_redis -p 6379:6379 -v /usr/local/apps/redis:/usr/local/redis --privileged=true redis:3.2
 
-// TODO -- mongodb
+// TODO --04. mongodb
 
     01.拉取镜像
         docker pull mongodb:4.0
@@ -32,7 +32,7 @@
         -p把mongo端口映射到宿主机的指定端口
         --auth表示连接mongodb需要授权
 
-// TODO -- nginx
+// TODO --05. nginx
 
     01.拉取Nginx镜像
         docker pull nginx
@@ -61,7 +61,7 @@
         docker cp nginx.conf  a_nginx:/etc/nginx/nginx.conf
 --------------------------------------------------------------------------------------------------
 
-// TODO -- elk的安装   xxx（下面下载elasticsearch5.6.8）
+// TODO --06. elk的安装   xxx（下面下载elasticsearch5.6.8）
 
     01.拉取Elasticsearch镜像
         docker pull sebp/elk
@@ -102,7 +102,7 @@
     --- 保存后，我们使用 control + P + Q 退出容器。然后重启容器，让我们的配置生效。
         docker restart elk
 
-// TODO --- elasticsearch下载安装
+// TODO ---07. elasticsearch下载安装
 
     -- 01.拉取elasticsearch镜像
         docker pull elasticsearch:5.6.8
@@ -111,7 +111,7 @@
         注:  9200端口(Web管理平台端口)  9300(服务默认端口)
         docker run -di -e ES_JAVA_OPTS="-Xms256m -Xmx256m" -p 9200:9200 -p 9300:9300 --name a_elk a_elasticsearch
 
-// TODO --- RabbitMQ的安装和启动
+// TODO ---08. RabbitMQ的安装和启动
 
     -- 01.拉取RabbitMQ镜像
           docker pull rabbitmq:management
@@ -125,7 +125,7 @@
      -- 03.输入用户名和密码，都为guest . 进入http://127.0.0.1:15672主界面
 
 
-// TODO --- oracle安装
+// TODO ---09. oracle安装
 
     -- 01.拉取oracle镜像
         docker pull docker.io/oraclelinux
@@ -142,14 +142,14 @@
     docker exec命令是在docker 1.3之后增加的一个比docker attach命令更加方便的命令。
     和docker exec差不多方便的命令是nsenter工具。
 
-// TODO --- nsenter安装
+// TODO ---10. nsenter安装
 
     $ cd /tmp;
     $ curl https://www.kernel.org/pub/linux/utils/util-linux/v2.24/util-linux-2.24.tar.gz | tar -zxf-; cd util-linux-2.24;
     $ ./configure  --without-ncurses
     $ make nsenter && sudo cp nsenter /usr/local/bin
 
-// TODO --- nsenter使用
+// TODO ---10.1 nsenter使用
     在使用nsenter命令之前需要获取到docker容器的进程，然后再使用nsenter工具进去到docker容器中，具体的使用方法如下：
 
     #每一个容器都有.State.Pid，所以这个命令除了容器的id需要我们根据docker ps -a去查找，其他的全部为固定的格式

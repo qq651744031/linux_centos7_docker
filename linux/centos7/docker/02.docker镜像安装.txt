@@ -14,6 +14,7 @@
         docker pull tomcat:8.5-jre8
     02.创建守护式容器 (挂载目录webapps/logs)，（需要在webapps文件夹中配置tomcat的4个文件夹）
         docker run -di --name=a_tomcat -p 8080:8080 -v /usr/local/apps/tomcat/classes:/usr/local/tomcat/webapps/classes -v /usr/local/apps/tomcat/logs:/usr/local/tomcat/logs --privileged=true tomcat:8.5-jre8
+        参数：  --privileged=true   (--privileged=true来解决挂载的目录没有权限的问题)
 
 // TODO --03. redis
 
@@ -38,27 +39,34 @@
         docker pull nginx
     02.创建Nginx容器（-v目录挂载）
         // docker run -di --name=a_nginx -p 80:80  nginx/bin/bash
-        docker run -di --name=a_nginx -p 80:80 -v /usr/local/apps/nginx:/etc/nginx/a_config nginx
+        （正确的nginx容器挂载...）
+        docker run -di --name=a_nginx -p 80:80 -v /usr/local/apps/nginx/a_conf:/etc/nginx/a_conf -v /usr/local/apps/nginx/log:/var/log/nginx -v /usr/local/apps/nginx/html:/usr/share/nginx/html --privileged=true nginx
+
 
         --- a.配置反向代理
         官方的nginx镜像,nginx配置文件nginx.conf 在/etc/nginx/目录下。在容器内编辑配置文件不方便，我们可以先将配置文件从容器内拷贝到宿主机，编辑修改后再拷贝回去。
 
         --- b.从容器拷贝配置文件到宿主机
-        [root@localhost ~]# docker cp a_nginx:/etc/nginx/nginx.conf nginx.conf
+        [root@localhost ~]# docker cp a_nginx:/etc/nginx/nginx.conf /usr/local/apps/nginx/nginx.conf
+        --- //宿主机内的文件移动到容器中
+        docker cp/usr/local/apps/tomcat/classes/index.jsp a_tomcat:/usr/local/tomcat/webapps/ROOT
+
+        docker run -di --name a_nginx -p 80:80 -v /usr/local/apps/nginx/a_conf:/etc/nginx/a_conf -v /usr/local/apps/nginx/html:/usr/share/nginx/html -v /usr/local/apps/nginx/log:/var/log/nginx nginx
         -- 修改nginx.conf 添加如下配置：
-        upstream tomcat-cas {
-        	server 172.17.0.7:8080;
+        upstream tomcat-server {
+        	server 172.17.0.3:8080;
         }
         server {
         	listen 80;
-        	server_name passport.pinyougou.com;
+        	server_name www.pinyougou.com;
         	location / {
-        		proxy_pass http://tomcat-cas;
+        		proxy_pass http://tomcat-server;
         		index index.html index.htm;
         	}
         }
         --- c.将修改后的配置文件拷贝到容器
-        docker cp nginx.conf  a_nginx:/etc/nginx/nginx.conf
+        docker cp /usr/local/apps/nginx/nginx.conf  a_nginx:/etc/nginx/nginx.conf
+        （docker cp a_nginx:/etc/nginx/nginx.conf /usr/local/apps/nginx/nginx.conf）
 --------------------------------------------------------------------------------------------------
 
 // TODO --06. elk的安装   xxx（下面下载elasticsearch5.6.8）

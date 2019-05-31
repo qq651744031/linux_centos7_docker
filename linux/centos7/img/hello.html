@@ -23,16 +23,24 @@
         alert(info + " 点我提交了！")
     }
 
+    function btn4() {
+        confirm("我要去百度.....")
+        window.location.href= 'http://www.baidu.com'
+    }
     function fun() {
         var username = document.getElementById('userName').value;
         var password = document.getElementById('password').value;
         return username + "  " + password
     }
 
+    setInterval("cg.innerHTML=new Date().toLocaleString()", 1000);
 </script>
 <body>
 <div>
-    <div style="margin-left: 10%;margin-top:5%;color: red">
+    <div style="margin-left: 10%;margin-top:2%;color: red">
+        <span id="cg" style="color: plum">
+        </span>
+        <br>
         This is test tomcat's web page !
     </div>
 </div>
@@ -50,10 +58,9 @@
             <tr>
                 <th align="center" colspan="2">
                     <button onclick="btn1()" type="button">弹出框</button>
-                    &nbsp;&nbsp;
                     <button onclick="btn2()" type="reset">重置</button>
-                    &nbsp;&nbsp;
                     <button onclick="btn3()" type="submit">提交</button>
+                    <button onclick="btn4()" type="button">百度</button>
                 </th>
             </tr>
         </table>
@@ -62,9 +69,7 @@
 <div>
     <div style="margin-left: 10%">
         <br>
-        <a href="http://www.baidu.com" title="点我就跳转到百度了...">跳转百度去</a>
-        <br>
-        <img src="mm.jpg" height="270px" width="230px" title="this is mm ,you see ~">
+        <img src="mm.jpg" height="270px" width="239px" title="this is mm ,you see ~">
     </div>
 </div>
 </body>

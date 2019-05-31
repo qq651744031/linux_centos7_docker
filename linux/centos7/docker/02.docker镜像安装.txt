@@ -6,14 +6,14 @@
     02.拉取镜像
         docker pull mysql:5.7
     03.创建守护式容器
-        docker run --name=a_mysql -p 3306:3306 -v/usr/local/apps/mysql:/usr/local/mysql -v /usr/local/apps/mysql/config:/usr/local/mysql/config -e MYSQL_ROOT_PASSWORD=123456 -d mysql:5.7
+        docker run --name=a_mysql -p 3306:3306 -v/usr/local/data/mysql:/usr/local/mysql -v /usr/local/data/mysql/config:/usr/local/mysql/config -e MYSQL_ROOT_PASSWORD=123456 -d mysql:5.7
 
 // TODO --02. tomcat
 
     01.拉取镜像
         docker pull tomcat:8.5-jre8
-    02.创建守护式容器 (挂载目录webapps/logs)，（需要在webapps文件夹中配置tomcat的4个文件夹）
-        docker run -di --name=a_tomcat -p 8080:8080 -v /usr/local/apps/tomcat/classes:/usr/local/tomcat/webapps/classes -v /usr/local/apps/tomcat/logs:/usr/local/tomcat/logs --privileged=true tomcat:8.5-jre8
+    02.创建守护式容器 (挂载目录webdata/logs)，（需要在webdata文件夹中配置tomcat的4个文件夹）
+        docker run -di --name=a_tomcat -p 8080:8080 -v /usr/local/data/tomcat/classes:/usr/local/tomcat/webdata/classes -v /usr/local/data/tomcat/logs:/usr/local/tomcat/logs --privileged=true tomcat:8.5-jre8
         参数：  --privileged=true   (--privileged=true来解决挂载的目录没有权限的问题)
 
 // TODO --03. redis
@@ -21,14 +21,14 @@
     01.拉取镜像
         docker pull redis:3.2
     02.创建守护式容器
-        docker run -di --name=a_redis -p 6379:6379 -v /usr/local/apps/redis:/usr/local/redis --privileged=true redis:3.2
+        docker run -di --name=a_redis -p 6379:6379 -v /usr/local/data/redis:/usr/local/redis --privileged=true redis:3.2
 
 // TODO --04. mongodb
 
     01.拉取镜像
         docker pull mongodb:4.0
     02.创建守护式容器
-        docker run -di --name a_mongodb -v /usr/local/apps/mongodb:/usr/local/mongodb -p 27017:27017 mongodb:4.0
+        docker run -di --name a_mongodb -v /usr/local/data/mongodb:/usr/local/mongodb -p 27017:27017 mongodb:4.0
         -v后面的参数表示把数据文件挂载到宿主机的路径
         -p把mongo端口映射到宿主机的指定端口
         --auth表示连接mongodb需要授权
@@ -40,18 +40,18 @@
     02.创建Nginx容器（-v目录挂载）
         // docker run -di --name=a_nginx -p 80:80  nginx/bin/bash
         （正确的nginx容器挂载...）
-        docker run -di --name=a_nginx -p 80:80 -v /usr/local/apps/nginx/a_conf:/etc/nginx/a_conf -v /usr/local/apps/nginx/log:/var/log/nginx -v /usr/local/apps/nginx/html:/usr/share/nginx/html --privileged=true nginx
+        docker run -di --name=a_nginx -p 80:80 -v /usr/local/data/nginx/a_conf:/etc/nginx/a_conf -v /usr/local/data/nginx/log:/var/log/nginx -v /usr/local/data/nginx/html:/usr/share/nginx/html --privileged=true nginx
 
 
         --- a.配置反向代理
         官方的nginx镜像,nginx配置文件nginx.conf 在/etc/nginx/目录下。在容器内编辑配置文件不方便，我们可以先将配置文件从容器内拷贝到宿主机，编辑修改后再拷贝回去。
 
         --- b.从容器拷贝配置文件到宿主机
-        [root@localhost ~]# docker cp a_nginx:/etc/nginx/nginx.conf /usr/local/apps/nginx/nginx.conf
+        [root@localhost ~]# docker cp a_nginx:/etc/nginx/nginx.conf /usr/local/data/nginx/nginx.conf
         --- //宿主机内的文件移动到容器中
-        docker cp/usr/local/apps/tomcat/classes/index.jsp a_tomcat:/usr/local/tomcat/webapps/ROOT
+        docker cp/usr/local/data/tomcat/classes/index.jsp a_tomcat:/usr/local/tomcat/webdata/ROOT
 
-        docker run -di --name a_nginx -p 80:80 -v /usr/local/apps/nginx/a_conf:/etc/nginx/a_conf -v /usr/local/apps/nginx/html:/usr/share/nginx/html -v /usr/local/apps/nginx/log:/var/log/nginx nginx
+        docker run -di --name a_nginx -p 80:80 -v /usr/local/data/nginx/a_conf:/etc/nginx/a_conf -v /usr/local/data/nginx/html:/usr/share/nginx/html -v /usr/local/data/nginx/log:/var/log/nginx nginx
         -- 修改nginx.conf 添加如下配置：
         upstream tomcat-server {
         	server 172.17.0.3:8080;
@@ -65,8 +65,8 @@
         	}
         }
         --- c.将修改后的配置文件拷贝到容器
-        docker cp /usr/local/apps/nginx/nginx.conf  a_nginx:/etc/nginx/nginx.conf
-        （docker cp a_nginx:/etc/nginx/nginx.conf /usr/local/apps/nginx/nginx.conf）
+        docker cp /usr/local/data/nginx/nginx.conf  a_nginx:/etc/nginx/nginx.conf
+        （docker cp a_nginx:/etc/nginx/nginx.conf /usr/local/data/nginx/nginx.conf）
 --------------------------------------------------------------------------------------------------
 
 // TODO --06. elk的安装   xxx（下面下载elasticsearch5.6.8）
@@ -115,7 +115,7 @@
     -- 01.拉取elasticsearch镜像
         docker pull elasticsearch:5.6.8
     -- 02.创建容器
-        docker run -di -e ES_JAVA_OPTS="-Xms256m -Xmx256m" --name=a_es -v /usr/local/apps/elasticsearch/a_config:/usr/share/elasticsearch/config/a_config -p 9200:9200 -p 9300:9300 elasticsearch:5.6.8
+        docker run -di -e ES_JAVA_OPTS="-Xms256m -Xmx256m" --name=a_es -v /usr/local/data/elasticsearch/a_config:/usr/share/elasticsearch/config/a_config -p 9200:9200 -p 9300:9300 elasticsearch:5.6.8
         注:  9200端口(Web管理平台端口)  9300(服务默认端口)
         docker run -di -e ES_JAVA_OPTS="-Xms256m -Xmx256m" -p 9200:9200 -p 9300:9300 --name a_elk a_elasticsearch
 

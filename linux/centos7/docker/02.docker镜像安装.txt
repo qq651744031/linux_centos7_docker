@@ -13,9 +13,9 @@
     01.拉取镜像
         docker pull tomcat:8.5-jre8
     02.创建守护式容器 (挂载目录webdata/logs)，（需要在webdata文件夹中配置tomcat的4个文件夹）
-        docker run -di --name=a_tomcat -p 8080:8080 -v /usr/local/data/tomcat/classes:/usr/local/tomcat/webdata/classes -v /usr/local/data/tomcat/logs:/usr/local/tomcat/logs --privileged=true tomcat:8.5-jre8
+        docker run -di --name=a_tomcat -p 8080:8080 -v /usr/local/data/tomcat/webapps:/usr/local/tomcat/webapps -v /usr/local/data/tomcat/logs:/usr/local/tomcat/logs --privileged=true tomcat:8.5-jre8
         参数：  --privileged=true   (--privileged=true来解决挂载的目录没有权限的问题)
-
+        [docker run -di --name=b_tomcat -p 8090:8080 tomcat:8.5-jre8]
 // TODO --03. redis
 
     01.拉取镜像
@@ -64,7 +64,7 @@
         		index index.html index.htm;
         	}
         }
-        --- c.将修改后的配置文件拷贝到容器
+      //TODO  --- c.将修改后的配置文件拷贝到容器
         docker cp /usr/local/data/nginx/nginx.conf  a_nginx:/etc/nginx/nginx.conf
         （docker cp a_nginx:/etc/nginx/nginx.conf /usr/local/data/nginx/nginx.conf）
 --------------------------------------------------------------------------------------------------

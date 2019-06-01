@@ -6,7 +6,7 @@
     02.拉取镜像
         docker pull mysql:5.7
     03.创建守护式容器
-        docker run --name=a_mysql -p 3306:3306 -v/usr/local/data/mysql:/usr/local/mysql -v /usr/local/data/mysql/config:/usr/local/mysql/config -e MYSQL_ROOT_PASSWORD=123456 -d mysql:5.7
+        docker run -di --name=a_mysql -p 3306:3306 -v/usr/local/data/mysql:/usr/local/mysql -v /usr/local/data/mysql/config:/usr/local/mysql/config -e MYSQL_ROOT_PASSWORD=123456 --privileged=true mysql:5.7
 
 // TODO --02. tomcat
 
@@ -28,7 +28,7 @@
     01.拉取镜像
         docker pull mongodb:4.0
     02.创建守护式容器
-        docker run -di --name a_mongodb -v /usr/local/data/mongodb:/usr/local/mongodb -p 27017:27017 mongodb:4.0
+        docker run -di --name a_mongodb -v /usr/local/data/mongodb:/usr/local/mongodb -p 27017:27017 --privileged=true mongodb:4.0
         -v后面的参数表示把数据文件挂载到宿主机的路径
         -p把mongo端口映射到宿主机的指定端口
         --auth表示连接mongodb需要授权
@@ -74,7 +74,7 @@
     01.拉取Elasticsearch镜像
         docker pull sebp/elk
     02.创建Elasticsearch容器
-        docker run -di -e ES_JAVA_OPTS="-Xms256m -Xmx256m" -p 5601:5601 -p 5044:5044 -p 9200:9200 -p 9300:9300 --name a_elk sebp/elk
+        docker run -di --name a_elk -e ES_JAVA_OPTS="-Xms256m -Xmx256m" -p 5601:5601 -p 5044:5044 -p 9200:9200 -p 9300:9300 --privileged=true sebp/elk
       {
         docker pull elasticsearch
         docker run -di -e ES_JAVA_OPTS="-Xms256m -Xmx256m" -p 9200:9200 -p 9300:9300 --name b_elk a_elasticsearch
@@ -115,7 +115,7 @@
     -- 01.拉取elasticsearch镜像
         docker pull elasticsearch:5.6.8
     -- 02.创建容器
-        docker run -di -e ES_JAVA_OPTS="-Xms256m -Xmx256m" --name=a_es -v /usr/local/data/elasticsearch/a_config:/usr/share/elasticsearch/config/a_config -p 9200:9200 -p 9300:9300 elasticsearch:5.6.8
+        docker run -di -e ES_JAVA_OPTS="-Xms256m -Xmx256m" --name=a_es -v /usr/local/data/es/a_config:/usr/share/elasticsearch/config/a_config -p 9200:9200 -p 9300:9300 --privileged=true elasticsearch:5.6.8
         注:  9200端口(Web管理平台端口)  9300(服务默认端口)
         docker run -di -e ES_JAVA_OPTS="-Xms256m -Xmx256m" -p 9200:9200 -p 9300:9300 --name a_elk a_elasticsearch
 
@@ -124,7 +124,7 @@
     -- 01.拉取RabbitMQ镜像
           docker pull rabbitmq:management
     -- 02.创建RabbitMQ容器
-          docker run -di --name=a_rabbitmq -p 5671:5617 -p 5672:5672 -p4369:4369 -p 15671:15671 -p 15672:15672 -p 25672:25672 rabbitmq:management
+          docker run -di --name=a_rabbitmq -p 5671:5617 -p 5672:5672 -p4369:4369 -p 15671:15671 -p 15672:15672 -p 25672:25672 --privileged=true rabbitmq:management
             -- 15672 (if management plugin is enabled.管理界面 )
           	-- 15671 management监听端口
           	-- 5672, 5671 (AMQP 0-9-1 without and with TLS 消息队列协议是一个消息协议)

@@ -29,3 +29,21 @@
 
 [root@HonLin ~]# shutdown -h 20:25
 Shutdown scheduled for 二 2019-05-21 20:25:00 CST, use 'shutdown -c' to cancel.
+
+
+// TODO---------------------拉取国内docker镜像-------------------------
+
+# 新版的 Docker 使用 /etc/docker/daemon.json（Linux）
+# 或者 %programdata%\docker\config\daemon.json（Windows）来配置 Daemon。
+
+# 请在该配置文件中加入（没有该文件的话，请先建一个）：
+
+{
+  "registry-mirrors": ["https://docker.mirrors.ustc.edu.cn"]
+}
+
+------------------
+
+{
+  "registry-mirrors":["https://docker.mirrors.ustc.edu.cn","https://hub-mirror.c.163.com","http://f1361db2.m.daocloud.io","https://docker.mirrors.ustc.edu.cn"]
+}

@@ -41,6 +41,8 @@
         // docker run -di --name=a_nginx -p 80:80  nginx/bin/bash
         （正确的nginx容器挂载...）
         docker run -di --name=a_nginx -p 80:80 -v /usr/local/data/nginx/a_conf:/etc/nginx/a_conf -v /usr/local/data/nginx/log:/var/log/nginx -v /usr/local/data/nginx/html:/usr/share/nginx/html --privileged=true nginx
+        -- (测试)
+        docker run -di --name=a_nginx -p 80:80 -v /usr/local/data/nginx/log:/var/log/nginx -v /usr/local/data/nginx/html:/usr/share/nginx/html --privileged=true nginx
 
 
         --- a.配置反向代理

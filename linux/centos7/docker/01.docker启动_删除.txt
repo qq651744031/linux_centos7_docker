@@ -45,3 +45,11 @@
         -- 目录挂载后容器内的目录会清空，重新创一个容器内将文件都拉外面出来
         [docker run -di --name=b_tomcat -p 8090:8080 tomcat:8.5-jre8]
         docker cp b_tomcat:/usr/local/tomcat/webapps/* /usr/local/data/tomcat/webapps
+        
+        
+        
+ // TODO 开启docker
+      service docker start
+      
+      
+    
